@@ -17,26 +17,32 @@
           </p>
         </div>
         <div class="action clearfix">
-              <%= link_to "" , ownership_path(item_code: item['itemCode'] , type: "Want it") ,
+              <% if item.want? %>
+                <%= link_to "" , ownership_path(item_code: item['itemCode'] , type: "Want it") ,
                     :class => "btn-want btn btn-danger btn-sm want_it",
                     :item_code => "want-#{item['itemCode']}",
                     :remote => true,
                     :method => :delete %>
-              <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Want") ,
+              <% else %>
+                <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Want") ,
                       :class => "btn-want btn btn-danger btn-sm want",
                       :item_code => "want-#{item['itemCode']}",
                       :remote => true,
                       :method => :post %>
-              <%= link_to "" , ownership_path(item_code: item['itemCode']) , type: "Have it") ,
+              <% end %>
+              <% if item.have? %>
+                <%= link_to "" , ownership_path(item_code: item['itemCode']) , type: "Have it") ,
                       :class => "btn-have btn btn-warning btn-sm have_it",
                       :item_code => "have-#{item['itemCode']}",
                       :remote => true,
                       :method => :delete %>
-              <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Have") ,
+              <% else %>
+                <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Have") ,
                       :class => "btn-have btn btn-warning btn-sm have",
                       :item_code => "have-#{item['itemCode']}",
                       :remote => true,
                       :method => :post %>
+              <% end %>
         </div>
       </div>
     <% end %>
