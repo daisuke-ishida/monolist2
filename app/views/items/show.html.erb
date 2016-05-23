@@ -1,9 +1,11 @@
+<h1><%= @item.name %>-monolist</h1>
+<h2><%= @item.name %>に関する情報です。この商品をほしい人、持っている人を表示しています。</h2>
 <div class="container">
   <div class="container-inner inner-sm clearfix">
     <div class="item-single-main">
       <div class="image">
         <div class="img-wrap">
-          <% if item.image? %> 
+          <% if @item.image? %> 
              <%= image_tag(item['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')) %>
           <% else %>
              <%= image_tag("no-image.png" , alt: @item.title) %>
