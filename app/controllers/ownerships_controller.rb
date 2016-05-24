@@ -4,6 +4,7 @@ class OwnershipsController < ApplicationController
   def create
     if params[:item_code]
       @item = Item.find_or_initialize_by(item_code: params[:item_code])
+      @item.save
     else
       @item = Item.find(params[:item_id])
     end
@@ -34,6 +35,7 @@ class OwnershipsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:item_id])
+    @item.destroy
 
     # TODO 紐付けの解除。 
     # params[:type]の値にHave itボタンが押された時には「Have」,
