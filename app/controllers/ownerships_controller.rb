@@ -4,9 +4,8 @@ class OwnershipsController < ApplicationController
   def create
     if params[:item_code]
       @item = Item.find_or_initialize_by(item_code: params[:item_code])
-      @item.save
     else
-      @item = Item.find(params[:item_id])
+      @item = Item.find_by(params[:item_id])
     end
 
     # itemsテーブルに存在しない場合は楽天のデータを登録する。
@@ -25,17 +24,28 @@ class OwnershipsController < ApplicationController
       @item.detail_page_url = item['itemUrl']
       @item.save!
     end
-
+  
+    if params[:type] == "Want"
+      current_user.want(@item)
+    else
+      current_user.have(@item)
+    end
+    
     # TODO ユーザにwant or haveを設定する
     # params[:type]の値にHaveボタンが押された時には「Have」,
     # Wantボタンが押された時には「Want」が設定されています。
     
 
+
   end
 
   def destroy
-    @item = Item.find(params[:item_id])
-    @item.destroy
+    if params[:type]=="Want"
+      @item = current_user.wants.find(params[:item_id])
+      current_user.unwant(@item)
+    else
+      @item = current_user.haves.find(params[:item_id])
+      current_user.unhave(@item)
 
     # TODO 紐付けの解除。 
     # params[:type]の値にHave itボタンが押された時には「Have」,
