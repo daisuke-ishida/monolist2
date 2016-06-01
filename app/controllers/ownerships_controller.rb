@@ -5,7 +5,7 @@ class OwnershipsController < ApplicationController
     if params[:item_code]
       @item = Item.find_or_initialize_by(item_code: params[:item_code])
     else
-      @item = Item.find_by(params[:item_id])
+      @item = Item.find(params[:item_id])
     end
 
     # itemsテーブルに存在しない場合は楽天のデータを登録する。
@@ -25,11 +25,12 @@ class OwnershipsController < ApplicationController
       @item.save!
     end
     
-    if params[:type] == "Have"
-      current_user.have(@item)
-    else
-      current_user.want(@item)
-    end
+      if params[:type] == "Have"
+       current_user.have(@item)
+      else
+       current_user.want(@item)
+      end
+      
     # TODO ユーザにwant or haveを設定する
     # params[:type]の値にHaveボタンが押された時には「Have」,
     # Wantボタンが押された時には「Want」が設定されています。
@@ -38,10 +39,10 @@ class OwnershipsController < ApplicationController
 
   def destroy
     if params[:type] == "Have"
-      @item = current_user.haves.find_by(params[:user_id]).item
+      @item = current_user.haves.find(params[:id]).item
       current_user.unhave(@item)
     else
-      @item = current_user.wants.find_by(params[:user_id]).item
+      @item = current_user.wants.find(params[:id]).item
       current_user.unwant(@item)
     end
     # TODO 紐付けの解除。 
