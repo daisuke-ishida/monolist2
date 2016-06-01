@@ -39,11 +39,11 @@ class User < ActiveRecord::Base
   end
 
   def unhave(item)
-    heves.find_by(item_id).destroy
+    haves.find_by(item_id).destroy
   end
 
   def have?(item)
-    heve_items.include?(item)
+    have_items.include?(item)
   end
 
   def want(item)

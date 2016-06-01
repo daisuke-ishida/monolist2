@@ -19,10 +19,10 @@
         <div class="action clearfix">
               <% if item.want? %>
                 <%= link_to "" , ownership_path(item_code: item['itemCode'] , type: "Want it") ,
-                    :class => "btn-want btn btn-danger btn-sm want_it",
-                    :item_code => "want-#{item['itemCode']}",
-                    :remote => true,
-                    :method => :delete %>
+                      :class => "btn-want btn btn-danger btn-sm want_it",
+                      :item_code => "want-#{item['itemCode']}",
+                      :remote => true,
+                      :method => :delete %>
               <% else %>
                 <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Want") ,
                       :class => "btn-want btn btn-danger btn-sm want",
@@ -31,7 +31,7 @@
                       :method => :post %>
               <% end %>
               <% if item.have? %>
-                <%= link_to "" , ownership_path(item_code: item['itemCode']) , type: "Have it") ,
+                <%= link_to "" , ownership_path(item_code: item['itemCode'] , type: "Have it") ,
                       :class => "btn-have btn btn-warning btn-sm have_it",
                       :item_code => "have-#{item['itemCode']}",
                       :remote => true,
