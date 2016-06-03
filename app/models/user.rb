@@ -30,12 +30,12 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    following_users.include?(other_user)
+    following_users.include?(other_use)
   end
 
   ## TODO 実装
   def have(item)
-    have.find_or_create_by(item_id: item.id)
+    haves.find_or_create_by(item_id: item.id)
   end
 
   def unhave(item)
