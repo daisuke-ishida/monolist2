@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    following_users.include?(other_use)
+    following_users.include?(other_user)
   end
 
   ## TODO 実装

@@ -17,27 +17,27 @@
           </p>
         </div>
         <div class="action clearfix">
-       <% itemmodel = Item.find_by(item_code: item['itemCode']) %>
-       <% if itemmodel != nil && current_user.want?(itemmodel) %>
-       <% wantmodel = current_user.want_items.find_by(item_code: item['itemCode']) %>
-               <%= link_to "" , ownership_path(:id => wantmodel.id , type: "Want") ,
+        <% itemmodel = Item.find_by(item_code: item['itemCode']) %>
+        <% if itemmodel != nil && current_user.want?(itemmodel) %>
+        <% wantmodel = current_user.want_items.find_by(item_code: item['itemCode']) %>
+               <%= link_to "" , ownerships_path(:id => wantmodel.id , type: "Want") ,
                :class => "btn-want btn btn-danger btn-sm want_it",
-               :item_id => "want-#{item['itemCode']}",
+               :item_code => "want-#{wantmodel.id}",
                :remote => true,
                :method => :delete %>
           <% else %>
                <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Want") ,
                :class => "btn-want btn btn-danger btn-sm want" ,
-               :item_id => "want-#{item['itemCode']}",
+               :item_code => "want-#{item['itemCode']}",
                :remote => true,
                :method => :post %>
           <% end %>
           
           <% if itemmodel != nil && current_user.have?(itemmodel) %>
           <% havemodel = current_user.have_items.find_by(item_code: item['itemCode']) %>
-                <%= link_to "" , ownership_path(:id => havemodel.id , type: "Have") ,
+                <%= link_to "" , ownerships_path(:id => havemodel.id , type: "Have") ,
                 :class => "btn-have btn btn-warning btn-sm have_it",
-                :item_code => "have-#{item['itemCode']}",
+                :item_code => "have-#{havemodel.id}",
                 :remote => true,
                 :method => :delete %>
            <% else %>

@@ -39,7 +39,6 @@
         <div class="side-box-body">
           <% # TODO Wantしたユーザー一覧 %>
           <% @item.want_users.each do |user| %>
-          <%= gravatar_for user %>
           <%= link_to gravatar_for(user), user_path(user.id) %>
           <% end %>
         </div>

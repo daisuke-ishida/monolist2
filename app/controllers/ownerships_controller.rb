@@ -24,6 +24,7 @@ class OwnershipsController < ApplicationController
       @item.save!
     end
     
+    
     if params[:type] == "Have"
       current_user.have(@item)
     else
