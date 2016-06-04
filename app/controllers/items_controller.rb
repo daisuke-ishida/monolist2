@@ -13,8 +13,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @users_have = User.have_users(params[:item_id])
-    @user_want = User.want_users(params[:item_id])
   end
 
   private
