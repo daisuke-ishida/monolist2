@@ -17,14 +17,12 @@
           </p>
         </div>
         <div class="action clearfix">
-        <% itemmodel = Item.find_by(item_code: item['itemCode']) %>
-        <% if itemmodel != nil && current_user.want?(itemmodel) %>
-        <% wantmodel = current_user.want_items.find_by(item_code: item['itemCode']) %>
-               <%= link_to "" , ownerships_path(:id => wantmodel.id , type: "Want") ,
-               :class => "btn-want btn btn-danger btn-sm want_it",
-               :item_code => "want-#{wantmodel.id}",
-               :remote => true,
-               :method => :delete %>
+          <% if current_user.want?(item) %>
+             <%= link_to "" , ownership_path(current_user.wants.find_by(:item_id => item.id) , 
+                  item_id: item.id , type: "Want") ,
+              :class => "want-#{item.id} btn-want btn btn-warning btn-sm want_it",
+              :remote => true,
+              :method => :delete %> 
           <% else %>
                <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Want") ,
                :class => "btn-want btn btn-danger btn-sm want" ,
@@ -32,14 +30,12 @@
                :remote => true,
                :method => :post %>
           <% end %>
-          
-          <% if itemmodel != nil && current_user.have?(itemmodel) %>
-          <% havemodel = current_user.have_items.find_by(item_code: item['itemCode']) %>
-                <%= link_to "" , ownerships_path(:id => havemodel.id , type: "Have") ,
-                :class => "btn-have btn btn-warning btn-sm have_it",
-                :item_code => "have-#{havemodel.id}",
-                :remote => true,
-                :method => :delete %>
+          <% if current_user.have?(item) %>
+          <%= link_to "" , ownership_path(current_user.haves.find_by(:item_id => item.id) , 
+                 item_id: item.id , type: "Have") ,
+                 :class => "have-#{item.id} btn-have btn btn-warning btn-sm have_it",
+                 :remote => true,
+                 :method => :delete %> 
            <% else %>
                <%= link_to "" , ownerships_path(item_code: item['itemCode'] , type: "Have") ,
                  :class => "btn-have btn btn-warning btn-sm have",

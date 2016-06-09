@@ -3,6 +3,7 @@
   <meta name="description" content="<%= @item.title %>に関する情報です。この商品を欲しい人、持ってる人を表示しています。" >
 <% end %>
 
+
   <div class="container-inner inner-sm clearfix">
     <div class="item-single-main">
       <div class="image">
@@ -27,7 +28,7 @@
         <div class="side-box-body">
           <% # TODO Haveしたユーザー一覧 %>
           <% @item.have_users.each do |user| %>
-          <%= link_to gravatar_for(user), user_path(user.id) %>
+          <%= link_to gravatar_for(user, options = { size: 20 }), user_path(user.id) %>
           <% end %>
         </div>
       </div>
@@ -36,7 +37,7 @@
         <div class="side-box-body">
           <% # TODO Wantしたユーザー一覧 %>
           <% @item.want_users.each do |user| %>
-          <%= link_to gravatar_for(user), user_path(user.id) %>
+          <%= link_to gravatar_for(user, options = { size: 20 }), user_path(user.id)  %>
           <% end %>
         </div>
       </div> 
