@@ -1,0 +1,26 @@
+<div class="container">
+<h2>Wantが多いアイテム上位10位</h2>
+  <div class="row">
+   <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1">
+     <table class="table table-bordered tabel-condensed">
+         <thead>
+           <tr class="danger"><th class="text-center">アイテム</th><th class="text-center">WantしているUser数</th></tr>
+　　　  </thead>
+        <tbody>
+           <% @item.each do |item| %>
+           <tr class="warning"><td> 
+              <% if item.large_image.present? %>
+                <%= image_tag(item.large_image , alt: item.title) %>
+              <% else %>
+                <%= image_tag("no-image.png" , alt: item.title) %>
+              <% end %>
+              <div class="detail">
+                <p class="title"><%= item.title %></p>
+              </div>
+           </td><td><%= item.want_users.count %></td></tr>
+           <% end %>
+        </tbody>
+     </table>
+    </div>
+   </div>
+ </div>
